@@ -9,6 +9,7 @@ langchain = "*"
 tiktoken = "*"
 python-dotenv = "*"
 pinecone-client = "*"
+streamlit = "*"
 
 [dev-packages]
 
