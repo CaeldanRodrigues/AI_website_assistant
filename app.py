@@ -1,6 +1,8 @@
 import os
-
 import streamlit as st
+
+from utils import *
+import constants
 
 # Creating Session State Variable
 if 'HuggingFace_API_Key' not in st.session_state:
@@ -21,12 +23,20 @@ st.title('🤖 AI Website Assistant')
 
 load_button = st.sidebar.button("Load data to Pinecone", key="load_button")
 
-#If the bove button is clicked, pushing the data to Pinecone...
 if load_button:
-    #Proceed only if API keys are provided
     if st.session_state['HuggingFace_API_Key'] !="" and st.session_state['Pinecone_API_Key']!="" :
 
-        # fetch and push data to Pinecone
+        site_data=get_website_data(constants.WEBSITE_URL)
+        st.write("Data pull done...")
+
+        chunks_data=split_data(site_data)
+        st.write("Spliting data done...")
+
+        embeddings=create_embeddings()
+        st.write("Embeddings instance creation done...")
+
+        push_to_pinecone(st.session_state['Pinecone_API_Key'],constants.PINECONE_ENVIRONMENT,constants.PINECONE_INDEX,embeddings,chunks_data)
+        st.write("Pushing data to Pinecone done...")
 
         st.sidebar.success("Data pushed to Pinecone successfully!")
     else:

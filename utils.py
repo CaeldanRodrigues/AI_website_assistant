@@ -1,6 +1,7 @@
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import Pinecone
-from langchain.embeddings.sentence_transformer import SentenceTransformerEmbeddings
+# from langchain.embeddings.sentence_transformer import SentenceTransformerEmbeddings
+from langchain.embeddings import OpenAIEmbeddings
 from langchain.document_loaders.sitemap import SitemapLoader
 import pinecone
 import asyncio
@@ -31,7 +32,8 @@ def split_data(docs):
 
 def create_embeddings():
 
-    embeddings = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
+    # embeddings = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
+    embeddings = OpenAIEmbeddings()
     return embeddings
 
 
