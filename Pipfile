@@ -10,6 +10,9 @@ tiktoken = "*"
 python-dotenv = "*"
 pinecone-client = "*"
 streamlit = "*"
+nest-asyncio = "*"
+lxml = "*"
+beautifulsoup4 = "*"
 
 [dev-packages]
 
